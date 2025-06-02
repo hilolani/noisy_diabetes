@@ -11,7 +11,6 @@ setup(
     install_requires=[
         'numpy',
         'pandas',
-        'random',
         'sklearn',
         "importlib-resources; python_version<'3.9'"
         # These libraries are currently all you need.
