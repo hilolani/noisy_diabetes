@@ -65,7 +65,7 @@ def load_total_noisy_diabetes(return_X_y=False, as_frame=False, scaled=True):
         for row in l
     ]
 
-    with open('/content/drive/My Drive/Colab Notebooks/total_noisy_diabetes_target.csv') as f:
+    with files(data).joinpath("total_noisy_diabetes_target.csv").open("r", encoding="utf-8") as f:
         reader = csv.reader(f)
         l = [row for row in reader]
     f.close()
