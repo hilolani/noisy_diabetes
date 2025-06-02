@@ -11,7 +11,6 @@ setup(
     install_requires=[
         'numpy',
         'pandas',
-        'csv',
         'random',
         'sklearn',
         "importlib-resources; python_version<'3.9'"
