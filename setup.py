@@ -8,6 +8,7 @@ setup(
         'numpy',
         'pandas',
         'csv',
+        'random',
         'sklearn',
         # These libraries are currently all you need.
     ],
