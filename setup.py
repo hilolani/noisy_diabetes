@@ -4,12 +4,16 @@ setup(
     name='noisy_diabetes',
     version='0.1',
     packages=find_packages(),
+    include_package_data=True,
+    package_data={
+        "noisy_diabetes": ["data/*.csv"],
+    },
     install_requires=[
         'numpy',
         'pandas',
         'csv',
         'random',
-        'sklearn',
+        'sklearn'
         # These libraries are currently all you need.
     ],
     author='Hiroyuki Akama',
