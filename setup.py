@@ -13,7 +13,8 @@ setup(
         'pandas',
         'csv',
         'random',
-        'sklearn'
+        'sklearn',
+        "importlib-resources; python_version<'3.9'"
         # These libraries are currently all you need.
     ],
     author='Hiroyuki Akama',
