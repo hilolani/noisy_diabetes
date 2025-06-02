@@ -1,4 +1,3 @@
 numpy
 pandas
-sklearn
 importlib-resources; python_version < "3.9"
