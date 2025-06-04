@@ -27,7 +27,7 @@ However, this dataset is characterized by the oddly high accuracy typical of toy
 
 Here, we have made it object-oriented, like a Scikit-learn dataset, returning a Bunch, and loaded the data in a form like load_diabetes(), which can be used in Pandas from hilolani's GitHub public repository.You can load it from the public GitHub repository of hilolani by running
 
-pip install git+https://github.com/hilolani/noisy_diabetes.git
+!pip install git+https://github.com/hilolani/noisy_diabetes.git
 
 on Colab.
 
