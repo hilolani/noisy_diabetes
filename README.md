@@ -1,5 +1,10 @@
 # noisy_diabetes
-The toy datasets included with Scikit-learn tend to achieve overly high accuracy when used for machine learning, so noise is added to intentionally lower the accuracy.
+The toy datasets included with Scikit-learn tend to achieve overly high accuracy when used for machine learning, so noise is added to intentionally lower the accuracy. Please run
+
+pip install git+https://github.com/hilolani/noisy_diabetes.git
+
+to use the contents.
+#############################################################
 
 Scikit Learn's medical toy dataset, diabetes
 
@@ -8,19 +13,13 @@ http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.
 is suitable for regression problems.
 
 The dataset gives 10 baseline independent variables for each of 442 diabetes patients: age, gender, body mass index, mean blood pressure, and six blood serum measures.
-
 The objective variable is a quantitative measure of disease progression from baseline to one year as the response of interest.
-
 Note that this data is already normalized, so there is no need to use Scalor.
 
 cf.
-
 https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset
-
 https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
-
 References.
-
 Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) “Least Angle Regression,” Annals of Statistics (with discussion), 407-499. (https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)
 
 However, this dataset is characterized by the oddly high accuracy typical of toy datasets, and we do not think it is suitable for machine learning training. What we provide here is a private API-compatible noisy toy dataset with normal noise, uniform noise, and data augmentation, in the wake of sklearn.datasets.load_diabetes(), which uses fully public data and code, so manipulation on the Cloud is not a problem. Also in that sense, it is possible for the learner to !git clone the public repository on GitHub on Colab.
