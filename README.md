@@ -45,9 +45,13 @@ Here is how to create a private dataset with noiseGaussian noise with a mean of 
 Strictly speaking, this addition of noise is not correct and requires using the raw data from GitHub and back-transforming to obtain the mean and standard deviation as follows.However, we did not use this method here for the sake of simplicity.
 
 df_raw = pd.read_csv(“diabetes_data_raw_revised.csv”, header=None)
-X_raw = df_raw.iloc[:, :-1].
-y_raw = df_raw.iloc[:, -1].
+
+X_raw = df_raw.iloc[:, :-1]
+
+y_raw = df_raw.iloc[:, -1]
+
 mean = X_raw.mean(axis=0)
+
 std = X_raw.std(axis=0)
 
 X_recovered = X_std * std.values + mean.values
