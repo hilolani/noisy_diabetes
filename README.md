@@ -3,7 +3,8 @@ The toy datasets included with Scikit-learn tend to achieve overly high accuracy
 
 pip install git+https://github.com/hilolani/noisy_diabetes.git
 
-to use the contents. The purpose of setting up this repository is to confirm to the learner that modeling machine learning with erroneous data augmentation leads to magical voodoo-like correlation (Kriegeskorte), double dipping, and information leakage, resulting in wrong results. Here, data augmentation is assumed to be realized as a result of repeated measurements on the same experimental participant.
+to use the contents. The purpose of setting up this repository is to confirm to the learner that modeling machine learning with erroneous data augmentation leads to magical voodoo-like correlation (Kriegeskorte), double dipping, and information leakage, resulting in wrong results. Here, data augmentation is assumed to be realized as a result of repeated measurements on the same experimental participant. An example of data augmentation with noise is described in noisy_diabetes/noisyy_diabetes/noisyy_diabetes.py
+and the actual pseudo datasets are stored in noisy_diabetes/noisyy_diabetes/data.
 
 #############################################################
 
