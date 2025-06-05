@@ -40,7 +40,7 @@ Here, we have made it object-oriented, like a Scikit-learn dataset, returning a 
 
 on Colab.
 
-Here is how to create a private dataset with noiseGaussian noise with a mean of 0 and standard deviation of 0.1 is added to the data to reduce the accuracy of the data.To simulate repeated measurements for data augmentation, we added a constant (in the range of [-0.001, 0.001]) uniform noise to this default row data, which was created by adding Gaussian noise, for 5 iterations.We also added the numbering of participants and sessions corresponding to each generated row. For this reason, we used Pandas' to_csv() function with the index=false option, and when reading using the read_csv() function, in addition to the existing feature names in the diabetes data set, we added dtype={‘participants’: int, 'sessions': int} in addition to the existing feature names in the diabetes dataset.
+Here is how to create a private dataset with Gaussian noise with a mean of 0 and standard deviation of 0.1 is added to the data to reduce the accuracy of the data.To simulate repeated measurements for data augmentation, we added a constant (in the range of [-0.001, 0.001]) uniform noise to this default row data, which was created by adding Gaussian noise, for 5 iterations.We also added the numbering of participants and sessions corresponding to each generated row. For this reason, we used Pandas' to_csv() function with the index=false option, and when reading using the read_csv() function, in addition to the existing feature names in the diabetes data set, we added dtype={‘participants’: int, 'sessions': int} to the existing feature names in the diabetes dataset.
 
 Strictly speaking, this addition of noise is not correct and requires using the raw data from GitHub and back-transforming to obtain the mean and standard deviation as follows.However, we did not use this method here for the sake of simplicity.
 
@@ -56,4 +56,4 @@ std = X_raw.std(axis=0)
 
 X_recovered = X_std * std.values + mean.values
 
-The objective variable is also noisy as followsHow to create the additional 5 session noisy target index value ‘y_noisy’, but using a random integer that follows a uniform distribution [-2, 2] range and added to each original y value.
+The objective variable is also noisy as follows. We created the additional 5 session noisy target index values as ‘y_noisy’, using a random integer that follows a uniform distribution [-2, 2] range to be added to each original y value.
