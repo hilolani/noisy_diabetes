@@ -14,6 +14,8 @@ Noisy pseudo datasets with repeated measurements mimicked for data augmentation 
 
 total_noisy_diabetes = load_total_noisy_diabetes()
 
+In this way, we demonstrated the following through a basic method of applying the simplest multilayer perceptron to diabetes public data augmented with systematic noise. Specifically, our partially adjusted double dipping, which focuses on specific areas of interest and applies data augmentation selectively, is more effective than conventional double dipping, which applies data augmentation uniformly across the entire dataset, in successfully achieving magical voodoo correlation.
+
 #############################################################
 
 Scikit Learn's medical toy dataset, diabetes
