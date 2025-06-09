@@ -77,14 +77,73 @@ X_recovered = X_std * std.values + mean.values
 
 また、目的変数も以下のようにしてノイズを加えています。追加5セッションのノイジーターゲットインデックス値'y_noisy'を作成する方法ですが、一様分布[-2, 2]の範囲に従うランダムな整数を使用して、各オリジナルのy値に追加しています。
 
-**このGitHubリポジトリを立ち上げた目的は、誤ったデータ拡張で機械学習をモデル化すると、魔術的なブードゥー相関関係（Kriegeskorte）、ダブルディッピング、情報漏洩が起こり、結果として間違った結果が得られることを学習者に確認させるためです。ここでは、データ拡張は、同じ実験参加者に対する反復測定の結果として実現されると仮定すします。ノイズによるデータ補強の例はnoisy_diabetes/noisyy_diabetes.pyに記述されており、実際の疑似データセットはnoisy_diabetes/noisyy_diabetes/dataに格納されています。**
+**このGitHubリポジトリを立ち上げた目的は、誤ったデータ拡張で機械学習をモデル化すると、魔術的なブードゥー相関関係（Kriegeskorte）、ダブルディッピング、情報漏洩が起こり、結果として間違った結果が得られることを学習者に確認させるためです。ここでは、データ拡張は、同じ実験参加者に対する反復測定の結果として実現されると仮定すします。ノイズによるデータ拡張の例はnoisy_diabetes/noisyy_diabetes.pyに記述されており、実際の疑似データセットはnoisy_diabetes/noisyy_diabetes/dataに格納されています。**
 
-**このようにして、系統的なノイズで補強された糖尿病のパブリックトイデータに、最も単純な多層パーセプトロンを適用する基本的な方法を通して、以下のことを実証しました。具体的には、特定の関心データ領域に焦点を当て、選択的にデータ拡張を適用する部分調整型ダブルディッピングは、データセット全体に一様にデータ補強を適用する従来のダブルディッピングよりも、魔法的ブードゥー相関を成功裏にイカサマを達成する上で効果的であるということです。 **
-"""
+**このようにして、系統的なノイズで補強された糖尿病のパブリックトイデータに、最も単純な多層パーセプトロンを適用する基本的な方法を通して、以下のことを実証しました。具体的には、特定の関心データ領域に焦点を当て、選択的にデータ拡張を適用する部分調整型ダブルディッピングは、データセット全体に一様にデータ拡張を適用する従来のダブルディッピングよりも、魔法的ブードゥー相関を成功裏にイカサマを達成する上で効果的であるということです。 **
 
+Scikit Learn's medical toy dataset, diabetes
 
+http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes
 
-"""## Scikerasについて赤間よりワーニング
+is suited for regression problems. This content is a quoted, modified, and expanded version of an example of a solution using KerasRegressor with a deep neural network by shibuiwilliam, published on GitHub.
+
+https://qiita.com/cvusk/items/33867fbec742bda3f307
+
+https://github.com/shibuiwilliam/keras_regression_sample/blob/master/keras_regression.ipynb
+
+Therefore, the main contents are based on this source for the design of the model and rewritten by Akama for Colab.
+
+###
+Diabetes Data
+For each of the 442 diabetic patients, we are given 10 baseline independent variables of age, gender, body mass index, mean blood pressure, and six blood serum measures.
+The objective variable is a quantitative measure of disease progression from baseline to one year as the response of interest.
+Note that this data is already normalized, so there is no need to use Scalor.
+
+cf.
+https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset
+https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
+
+References.
+
+Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) “Least Angle Regression,” Annals of Statistics ( with discussion), 407-499.
+(https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)
+
+However, this dataset is characterized by the oddly high accuracy typical of toy datasets, and we do not think it is suitable for machine learning training. This is a data augmentation (data augmentation) or adding normal noise or uniform noise to data or target.
+###
+Diabetes data with noise added
+
+We will use a private API-compatible noisy toy dataset like sklearn.datasets.load_diabetes() in class, which uses fully public data and code, so manipulating it on the Cloud is not a problem. Also in that sense, it is possible for the learner to !git clone the public repository on GitHub on Colab.
+Here, we have made it object-oriented and return Bunch, like a Scikit-learn dataset, and loaded the data in a form like load_diabetes(), which can then be used in Pandas. You can load it from the public GitHub repository, which is the following.
+
+https://github.com/hilolani/noisy_diabetes
+
+This repository can be installed on Colab by running,
+
+!pip installgit+https://github.com/hilolani/noisy_diabetes.git
+
+The following is how to create a private dataset containing noise. Gaussian noise with a mean of 0 and standard deviation of 0.1 is added to the data to reduce the accuracy of the data. To simulate repeated measurements for data augmentation, we added a constant (in the range of [-0.001, 0.001]) uniform noise to this default row data, which was created by adding Gaussian noise, for 5 iterations. We also added the numbering of participants and sessions corresponding to each generated row. For this reason, we used Pandas' to_csv() function with the index=false option, and when reading using the read_csv() function, in addition to the existing feature names in the diabetes data set, we added dtype={'participants': int, 'sessions': int} in addition to the existing feature names in the diabetes dataset.
+
+Strictly speaking, this addition of noise is not correct and requires using the raw data from GitHub and back-transforming to obtain the mean and standard deviation as follows. However, we did not use this method here for the sake of simplicity.
+
+df_raw = pd.read_csv(“diabetes_data_raw_revised.csv”, header=None)
+
+X_raw = df_raw.iloc[:, :-1]
+
+y_raw = df_raw.iloc[:, -1]
+
+mean = X_raw.mean(axis=0)
+
+std = X_raw.std(axis=0)
+
+X_recovered = X_std * std.values + mean.values
+
+The objective variable is also noisy as follows. To create the additional 5 session noisy target index value 'y_noisy', we used a random integer that follows a uniform distribution [-2, 2] range and adding it to each original y value.
+
+The purpose of setting up this GitHub repository is to confirm for the learner that modeling machine learning with the wrong data extension can lead to magical voodoo correlation (Kriegeskorte), double dipping, and information leakage, resulting in wrong results. Here we assume that data augmentation is realized as a result of repeated measurements on the same experimental participant. An example of data augmentation by noise is described in noisy_diabetes/noisyyy_diabetes.py and the actual pseudo-dataset is stored in noisy_diabetes/noisyyy_diabetes/data.
+
+*Through this basic method of applying the simplest multilayer perceptron to diabetes public toy data augmented with systematic noise, we have demonstrated the following. Specifically, that partial-tuned double-dipping, which focuses on specific data regions of interest and selectively applies data expansion, is more effective than traditional double-dipping, which applies data expansion uniformly to the entire data set, in successfully achieving magical voodoo correlation cheating . *
+
+## Scikerasについて赤間よりワーニング
 
 shibuiwilliamのコードをGoogle Colabで実行するためにScikerasを使用します。原作者のコードそのままではGoogle Colabで使えません。
 
@@ -104,8 +163,6 @@ See
 SciKerasのドキュメントによると
 
 「scikerasのゴールは、Keras/TensorFlowをsklearnで使えるようにすることです。これは、Scikit-Learnインターフェイスを持つKerasのラッパーを提供することで達成されます。SciKerasはkeras.wrappers.scikit_learnの後継であり、TensorFlowバージョンのラッパーよりも多くの改善を提供しています。」
-
-
 """
 
 from google.colab import drive
