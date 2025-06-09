@@ -31,7 +31,9 @@ Note that this data is already normalized, so there is no need to use Scalor.
 cf.
 https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset
 https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
+
 References.
+
 Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) “Least Angle Regression,” Annals of Statistics (with discussion), 407-499. (https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)
 
 However, this dataset is characterized by the oddly high accuracy typical of toy datasets, and we do not think it is suitable for machine learning training. What we provide here is a private API-compatible noisy toy dataset with normal noise, uniform noise, and data augmentation, in the wake of sklearn.datasets.load_diabetes(), which uses fully public data and code, so manipulation on the Cloud is not a problem. Also in that sense, it is possible for the learner to !git clone the public repository on GitHub on Colab.
