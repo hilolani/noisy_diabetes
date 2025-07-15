@@ -85,3 +85,12 @@ def load_total_noisy_diabetes(return_X_y=False, as_frame=False, scaled=True):
         target_filename=None,
     )
 
+def partial_flip_flop(binarray, probability):
+    binarray = np.asarray(binarray)
+    n = len(binarray)
+    k = int(n * probability)
+    flip_indices = np.random.choice(n, size=k, replace=False)
+    flipped = binarray.copy()
+    flipped[flip_indices] = 1 - flipped[flip_indices]
+    return flipped
+    
