@@ -1,5 +1,5 @@
 # noisy_diabetes
-The toy datasets included with Scikit-learn tend to achieve overly high accuracy when used for machine learning, so noise is added to intentionally lower the accuracy. Please run
+The toy datasets included with Scikit-learn tend to achieve overly high accuracy when used for machine learning, so noise is added to intentionally lower the accuracy for educational purposes. Please run
 
 pip install git+https://github.com/hilolani/noisy_diabetes.git
 
